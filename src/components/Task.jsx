@@ -1,15 +1,10 @@
-import React from 'react';
-
-const Task = ({ task, onDelete, onToggle }) => {
+const Task = ({ task, onToggle }) => {
   return (
-    <li>
-      <span
-        className={task.completed ? 'completed' : ''}
-        onClick={onToggle}
-      >
-        {task.title}
-      </span>
-      <button onClick={onDelete}>Supprimer</button>
+    <li 
+      onClick={() => onToggle(task.id)}
+      style={{ textDecoration: task.completed ? 'line-through' : 'none' }}
+    >
+      {task.title}
     </li>
   );
 };

@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const AddTodoForm = ({ onAddTask }) => {
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState(""); // État du champ input
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (title.trim()) {
-      onAddTask(title);
-      setTitle('');
-    }
+    if (title.trim() === "") return; // On vérifie qu'on n'ajoute pas une tâche vide
+
+    onAddTask(title); // On remonte la tâche à App.jsx
+    setTitle(""); // On réinitialise le champ après l'ajout
   };
 
   return (

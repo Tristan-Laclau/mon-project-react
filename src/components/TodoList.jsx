@@ -1,16 +1,11 @@
-import React from 'react';
-import Task from './task';
+import React from "react";
+import Task from "./Task";
 
-const TodoList = ({ tasks, onDeleteTask, onToggleTask }) => {
+const TodoList = ({ tasks, onToggle}) => {
   return (
     <ul>
-      {tasks.map(task => (
-        <Task
-          key={task.id}
-          task={task}
-          onDelete={() => onDeleteTask(task.id)}
-          onToggle={() => onToggleTask(task.id)}
-        />
+      {tasks.map((task) => (
+        <Task key={task.id} task={task} onToggle={onToggle} />
       ))}
     </ul>
   );
