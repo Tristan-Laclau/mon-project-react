@@ -2,13 +2,28 @@
   "tasks": [
     {
       "id": "1",
-      "title": "Acheter du pain",
+      "title": "Apprendre React",
       "completed": false
     },
     {
       "id": "2",
-      "title": "Finir le projet React",
+      "title": "Finir ma ToDo List",
       "completed": true
+    },
+    {
+      "id": "3",
+      "title": "Boire un café",
+      "completed": true
+    },
+    {
+      "id": "10ca",
+      "title": "test",
+      "completed": false
+    },
+    {
+      "id": "da29",
+      "title": "Nouvelle tâche",
+      "completed": false
     }
   ]
 }
