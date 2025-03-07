@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TodoList from "./components/todoList";
 import AddTodoForm from "./components/AddTodoForm";
-import Counter from "./components/counter";
 import axios from "axios";
-import Demo from "./components/Demo";
 import "./App.css";
 import PriorityFilter from "./components/PriorityFilter";
 import ThemeButton from "./components/ThemeButton";

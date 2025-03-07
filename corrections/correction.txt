@@ -105,4 +105,17 @@ EXERCICE 5
 --- On ajoute un state "theme" pour pouvoir modifier les classes CSS dynamiquement---
 --- On sauvegardee ce thème dans le LocalStorage pour qu'il soit conversé après un rechargement (et surtout pas en bdd) ---
 Dans App.jsx :
-
+<div className= {`app ${theme}`}> {/* La classe change dynamiquement selon la valeur de "theme"*/}
+--- sur la div de plus haut niveau pour que tout les enfants héritent du css de la classe ---
+ensuite dans App.css
+  /* Mode clair */
+  .app.light {
+    background: #f5f5f5;
+    color: #222;
+  }
+  
+  /* Mode sombre */
+  .app.dark {
+    background: #2c2c2c;
+    color: #e0e0e0;
+  }
