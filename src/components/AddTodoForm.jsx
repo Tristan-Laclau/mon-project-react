@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 
 const AddTodoForm = ({ onAddTask }) => {
-  const [title, setTitle] = useState(""); // État du champ input
+  const [title, setTitle] = useState("");
+  const [priority, setPriority] = useState("Moyenne"); // Priorité par défaut
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (title.trim() === "") return; // On vérifie qu'on n'ajoute pas une tâche vide
-
-    onAddTask(title); // On remonte la tâche à App.jsx
-    setTitle(""); // On réinitialise le champ après l'ajout
+    if (title.trim()) {
+      onAddTask(title, priority);
+      setTitle("");
+      setPriority("Moyenne");
+    }
   };
 
   return (
@@ -19,6 +22,14 @@ const AddTodoForm = ({ onAddTask }) => {
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Ajouter une tâche"
       />
+
+    <select value={priority} onChange={(e) => setPriority(e.target.value)}>
+        <option value="Basse">Basse</option>
+        <option value="Moyenne">Moyenne</option>
+        <option value="Haute">Haute</option>
+    </select>
+        
+
       <button type="submit">Ajouter</button>
     </form>
   );

@@ -2,6 +2,9 @@ const Task = ({ task, onToggle, onDelete }) => {
   return (
     <li style={{ textDecoration: task.completed ? 'line-through' : 'none' }}>
       <span onClick={() => onToggle(task.id)}>{task.title}</span>
+      <span style={{ marginLeft: "10px", fontWeight: "bold", color: task.priority === "Haute" ? "red" : task.priority === "Moyenne" ? "orange" : "green" }}>
+        [{task.priority}]
+      </span>
       <button onClick={() => onDelete(task.id)}> X </button>
     </li>
   );

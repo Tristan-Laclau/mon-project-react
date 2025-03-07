@@ -1,0 +1,108 @@
+EXERCICE 1
+---Ajouter un bouton supprimer dans Task.jsx---
+
+<button onClick={onDelete}> X </button>
+
+---Definir deleteTask dans App.jsx---
+
+const deleteTask = (taskId) => {
+    setTasks(tasks.filter(task => task.id !== taskId));
+  }
+
+----Ajouter deleteTask à TodoList et Task---
+
+onDelete={() => onDelete(task.id)}
+
+onDelete={deleteTask}
+*/
+
+EXERCICE 2
+---Redéfinir la fonction de suppression, si l'exercice 1 était bon, cela devrait suffire---
+---Si vous la renommez, n'oubliez pas de changer le nom dans le prop de votre composant enfant---
+
+const handleDeleteTask = (id) => {
+    axios
+      .delete(`http://localhost:5000/tasks/${id}`)
+      .then((response)=> setTasks(tasks.filter((task)=> task.id != id)))
+      .catch((error)=> console.error("Erreur lors de la suppression d'une tâche :", error));
+}
+
+
+EXERCICE 3
+---Pas de state inutile---
+---Utilise le state existant donc mis à jour quand tasks change---
+
+<h2>Tâches restantes : {tasks.filter(task => !task.completed).length}</h2>
+
+EXERCICE 4
+---On commence par modifier handleAddTask, on lui passe un objet "task" en paramètre---
+
+Ensuite on modifie le formulaire pour ajouter priorité et un menu déroulant
+Dans AddToDoForm : */
+const [task, setTask] = useState({title : "", priority : "Moyenne"}); // État du champ input
+
+---Formulaire mis à jour---
+
+<form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        value={title}
+        onChange={(e) => setTask({title : e.target.value, priority : task.priority})}
+        placeholder="Ajouter une tâche"
+      />
+
+      <select
+        value={priority}
+        onChange={(e) => setTask({title : task.title , priority : e.target.value})}>
+        <option value="Basse"> Basse </option>
+        <option value="Moyenne"> Moyenne </option>
+        <option value="Haute"> haut </option>
+      </select>
+        
+
+      <button type="submit">Ajouter</button>
+    </form>
+
+---On change l'affichage dans Task---
+
+<span style={{ marginLeft: "10px", fontWeight: "bold", color: task.priority === "Haute" ? "red" : task.priority === "Moyenne" ? "orange" : "green" }}>
+        [{task.priority}]
+      </span>
+
+--- Filtre des priorités dans App.jsx ---
+
+//Charger les tâches lorsque la priorité change
+
+const [filterPriority, setFilterPriority] = useState("Toutes");
+
+  const handleFilterChange = (e) => {
+    setFilterPriority(e.target.value);
+  }
+
+  ---On crée un composant pour le filtre---
+
+  import React from "react";
+
+const PriorityFilter = ({ filterPriority, onPriorityChange }) => {
+  return (
+    <select value={filterPriority} onChange={onPriorityChange}>
+      <option value="Toutes">Toutes</option>
+      <option value="Basse">Basse</option>
+      <option value="Moyenne">Moyenne</option>
+      <option value="Haute">Haute</option>
+    </select>
+  );
+};
+
+export default PriorityFilter;
+
+---On ajoute ce composant dans App.jsx---
+
+<PriorityFilter filterPriority={filterPriority} onPriorityChange={handleFilterChange}/>
+
+
+EXERCICE 5
+--- On ajoute un state "theme" pour pouvoir modifier les classes CSS dynamiquement---
+--- On sauvegardee ce thème dans le LocalStorage pour qu'il soit conversé après un rechargement (et surtout pas en bdd) ---
+Dans App.jsx :
+
